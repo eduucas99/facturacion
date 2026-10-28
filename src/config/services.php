@@ -35,6 +35,7 @@ return [
         ],
     ],
     'afip' => [
+        'arca_url'     => env('ARCA_URL'),
         'access_token' => env('ARCA_ACCESS_TOKEN'),
         'cuit'         => env('ARCA_CUIT'),
         'production'   => env('AFIP_PRODUCTION', false),

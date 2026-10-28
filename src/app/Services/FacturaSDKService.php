@@ -14,7 +14,7 @@ class FacturaSdkService
     {
         $this->cfg = config('services.afip');
         $this->token = $this->cfg['access_token'];
-        $this->baseUrl = 'https://app.afipsdk.com/api/v1/';
+        $this->baseUrl =  $this->cfg['arca_url'];
     }
 
     /**
