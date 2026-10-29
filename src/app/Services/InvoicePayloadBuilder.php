@@ -44,12 +44,11 @@ class InvoicePayloadBuilder
 
         $net = round($net, 2);
 
-        return [
+        $payload = [
             'issuer_cuit'  => (int) config('services.afip.cuit'),
             'invoice_type' => $type,
             'sales_point'  => (int) ($in['sales_point'] ?? 1),
             'concept'      => (int) ($in['concept'] ?? 1),
-            'vat_items'    => $type === 11 ? null : $vatItems,
             'receiver'     => [
                 'doc_type'      => (int) ($in['receiver']['doc_type'] ?? 99),
                 'doc_number'    => (string) ($in['receiver']['doc_number'] ?? '0'),
@@ -65,5 +64,11 @@ class InvoicePayloadBuilder
             'items'          => $items,
             'sale_condition' => (string) ($in['sale_condition'] ?? '1'),
         ];
+
+        if ($type !== 11) {
+            $payload['vat_items'] = $vatItems;
+        }
+
+        return $payload;
     }
 }
